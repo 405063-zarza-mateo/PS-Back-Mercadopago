@@ -1,0 +1,17 @@
+
+services:
+
+
+  mp-service:
+    build: ../PS-Back-Mercadopago
+    container_name: mp-service
+    ports:
+      - "8082:8082"
+    networks:
+      - mp-network
+
+
+networks:
+  mp-network:
+    external: true
+    name: shared-network
