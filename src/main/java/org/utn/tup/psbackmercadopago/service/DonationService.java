@@ -73,10 +73,19 @@ public class DonationService {
                     .unitPrice(request.getAmount())
                     .build();
 
+
+            PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
+                    .success(frontendUrl + "/donation/success")
+                    .failure(frontendUrl + "/donation/failure")
+                    .pending(frontendUrl + "/donation/pending")
+                    .build();
+
             // PREFERENCIA MÍNIMA - Sin URLs de retorno para testear
             PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                     .items(Collections.singletonList(item))
                     .externalReference(externalReference)
+                    .backUrls(backUrls)
+                    .autoReturn("approved")
                     .build();
 
             log.info("Creating minimal preference with external reference: {}", externalReference);
