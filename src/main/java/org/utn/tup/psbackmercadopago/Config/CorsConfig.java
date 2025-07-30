@@ -22,7 +22,17 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200", "https://localhost:4200")
+                        // Agregado http://localhost:80 para el contenedor
+                        .allowedOrigins(
+                                "http://localhost:4200",    // Angular dev
+                                "https://localhost:4200",   // Angular dev HTTPS
+                                "http://localhost",         // Frontend en puerto 80
+                                "http://localhost:80",      // Frontend en puerto 80 (explícito)
+                                "http://ps-front",          // Nombre del contenedor frontend
+                                "http://ps-front:80"        // Contenedor frontend con puerto
+                                , "https://elgalponcitoateneo.com.ar/"
+
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .exposedHeaders("Authorization")
@@ -35,7 +45,17 @@ public class CorsConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        // Mismos orígenes que arriba
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:4200",    // Angular dev
+                "https://localhost:4200",   // Angular dev HTTPS
+                "http://localhost",         // Frontend en puerto 80
+                "http://localhost:80",      // Frontend en puerto 80 (explícito)
+                "http://ps-front",          // Nombre del contenedor frontend
+                "http://ps-front:80"        // Contenedor frontend con puerto
+                , "https://elgalponcitoateneo.com.ar/"
+
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
         configuration.setExposedHeaders(Arrays.asList("Authorization"));

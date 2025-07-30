@@ -5,6 +5,7 @@ import com.mercadopago.client.preference.*;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
+import com.mercadopago.resources.preference.PreferenceBackUrls;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,7 @@ public class DonationService {
                     .failure(frontendUrl + "/donation/failure")
                     .pending(frontendUrl + "/donation/pending")
                     .build();
+
 
             // PREFERENCIA MÍNIMA - Sin URLs de retorno para testear
             PreferenceRequest preferenceRequest = PreferenceRequest.builder()
